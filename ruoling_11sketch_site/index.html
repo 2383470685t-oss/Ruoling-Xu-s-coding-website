@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Ruoling Xu's website</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<style>html,body{margin:0;height:100%;background:#080808;overflow:hidden;color:#fff;font-family:sans-serif}
+.preview{position:absolute;border:1px solid rgba(255,255,255,.2);background:#111;display:none;pointer-events:none}</style></head><body>
+<div id="preview" class="preview"></div>
+<script>
+let state='text',pts=[],groups=[],FONT;
+function preload(){FONT=loadFont('https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/font/SourceCodePro-Regular.otf');}
+function setup(){createCanvas(windowWidth,windowHeight);
+textFont(FONT);textSize(min(120,width/8));
+let b=FONT.textBounds("Ruoling Xu’s website",0,0,textSize());
+let x=(width-b.w)/2,y=height/2+20;
+pts=FONT.textToPoints("Ruoling Xu’s website",x,y,textSize(),{sampleFactor:0.22});
+pts.forEach(p=>Object.assign(p,{vx:random(-0.5,0.5),vy:random(-0.5,0.5)}));}
+function draw(){background(8);
+if(state==='text'){noStroke();fill(255);for(let p of pts){p.x+=p.vx*0.3;p.y+=p.vy*0.3;circle(p.x,p.y,2);}}
+else drawClusters();}
+function mousePressed(){if(state==='text')explode();else for(let g of groups)if(dist(mouseX,mouseY,g.x,g.y)<g.r)location.href='sketches/sketch'+(g.id+1)+'.html';}
+function explode(){for(let p of pts){p.vx=random(-6,6);p.vy=random(-6,6);}setTimeout(startClusters,420);state='clusters';}
+function startClusters(){groups=[];let G=11,per=40;for(let i=0;i<G;i++){let g={id:i,x:random(width*0.15,width*0.85),y:random(height*0.15,height*0.85),vx:random(-1,1),vy:random(-1,1),r:random(60,120),parts:[]};
+for(let j=0;j<per;j++)g.parts.push({x:g.x+random(-g.r,g.r),y:g.y+random(-g.r,g.r),vx:random(-1,1),vy:random(-1,1)});
+groups.push(g);}}
+function drawClusters(){for(let g of groups){g.x+=g.vx;g.y+=g.vy;if(g.x<g.r||g.x>width-g.r)g.vx*=-1;if(g.y<g.r||g.y>height-g.r)g.vy*=-1;
+for(let p of g.parts){p.vx+=(g.x-p.x)*0.001+random(-0.2,0.2);p.vy+=(g.y-p.y)*0.001+random(-0.2,0.2);p.x+=p.vx;p.y+=p.vy;}
+stroke(255,100);strokeWeight(0.6);for(let i=0;i<g.parts.length;i++)for(let j=i+1;j<g.parts.length;j++){let a=g.parts[i],b=g.parts[j],d=dist(a.x,a.y,b.x,b.y);if(d<70)line(a.x,a.y,b.x,b.y);}
+noStroke();for(let p of g.parts)circle(p.x,p.y,3+noise(p.x*0.01,p.y*0.01)*4);
+if(dist(mouseX,mouseY,g.x,g.y)<g.r){showPreview(g.id);fill(255,40);noStroke();circle(g.x,g.y,g.r*2);}}
+}
+function mouseMoved(){if(state==='clusters')checkHover();}
+function checkHover(){let over=-1;for(let g of groups)if(dist(mouseX,mouseY,g.x,g.y)<g.r){over=g.id;break;}if(over>=0)showPreview(over);else hidePreview();}
+function showPreview(id){let d=document.getElementById('preview');d.style.display='block';d.style.left=(mouseX+15)+'px';d.style.top=(mouseY+15)+'px';d.innerHTML='<iframe src="sketches/sketch'+(id+1)+'.html" width=320 height=220 style="border:0"></iframe>';}
+function hidePreview(){let d=document.getElementById('preview');d.style.display='none';d.innerHTML='';}
+function windowResized(){resizeCanvas(windowWidth,windowHeight);}
+</script></body></html>

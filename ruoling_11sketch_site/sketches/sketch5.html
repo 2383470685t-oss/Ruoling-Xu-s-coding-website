@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sketch5</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/addons/p5.sound.min.js"></script>
+<style>html,body{margin:0;height:100%;background:#000}</style></head><body><script>function setup(){createCanvas(600,600);noStroke();}
+function draw(){background(0,20);for(let x=0;x<width;x+=20){for(let y=0;y<height;y+=20){
+let d=dist(x,y,width/2,height/2);
+let wave=sin(d*0.15-frameCount*0.03)*cos((mouseX+mouseY)*0.06+frameCount*0.02);
+fill(150+wave*80,sin(x*0.03+frameCount*0.02)*55,100+cos(y*0.03-frameCount*0.02)*55,100);
+ellipse(x,y,8+wave*12,8+cos(d*0.03+frameCount*0.04)*30);}}}</script></body></html>

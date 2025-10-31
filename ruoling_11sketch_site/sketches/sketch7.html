@@ -1,0 +1,8 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sketch7</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/addons/p5.sound.min.js"></script>
+<style>html,body{margin:0;height:100%;background:#000}</style></head><body><script>let x=[],y=[],px=[],py=[],num=500;
+function setup(){createCanvas(windowWidth,windowHeight);stroke(255,50);strokeWeight(2);
+for(let i=0;i<num;i++){x[i]=random(width);y[i]=random(height);px[i]=x[i-10];py[i]=y[i-10];}}
+function draw(){background(0,20);for(let i=0;i<num;i++){let n=noise(x[i]*0.005,y[i]*0.005,frameCount*0.005);
+x[i]+=cos(2*n*PI)*2;y[i]+=sin(n*PI)*2;line(px[i],py[i],x[i],y[i]);px[i]=x[i];py[i]=y[i];}}</script></body></html>

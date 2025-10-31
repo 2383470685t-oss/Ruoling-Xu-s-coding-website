@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sketch11</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/addons/p5.sound.min.js"></script>
+<style>html,body{margin:0;height:100%;background:#000}</style></head><body><script>let cam;
+function setup(){createCanvas(960,540);pixelDensity(1);cam=createCapture(VIDEO);cam.size(width,height);cam.hide();}
+function draw(){background(0);cam.loadPixels();loadPixels();
+for(let x=0;x<width;x++){for(let y=0;y<height;y++){let i=(x+y*width)*4;
+let oX=int(random(-20,20)),oY=int(random(-20,20)),px=constrain(x+oX,0,width-1),py=constrain(y+oY,0,height-1);
+let loc=(px+py*width)*4;pixels[i]=cam.pixels[loc];pixels[i+1]=cam.pixels[loc+1];pixels[i+2]=cam.pixels[loc+2];pixels[i+3]=200+sin(frameCount*0.05+x*0.02)*55;}}updatePixels();}</script></body></html>

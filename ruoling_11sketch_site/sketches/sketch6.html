@@ -1,0 +1,8 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sketch6</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/addons/p5.sound.min.js"></script>
+<style>html,body{margin:0;height:100%;background:#000}</style></head><body><script>let xVals=[],yVals=[],numSegments=50;
+function setup(){createCanvas(windowWidth,windowHeight);for(let i=0;i<numSegments;i++){xVals[i]=width/2;yVals[i]=height/2;}noStroke();}
+function draw(){background(30);xVals[numSegments-1]=mouseX;yVals[numSegments-1]=mouseY;
+for(let i=0;i<numSegments-1;i++){xVals[i]=lerp(xVals[i],xVals[i+1],0.2);yVals[i]=lerp(yVals[i],yVals[i+1],0.2);
+let c=lerpColor(color(255,100,50,200),color(50,150,255,50),i/numSegments);fill(c);ellipse(xVals[i],yVals[i],map(i,0,numSegments,2,20));}}</script></body></html>

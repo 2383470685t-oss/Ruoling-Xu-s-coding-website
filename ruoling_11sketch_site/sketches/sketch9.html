@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sketch9</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/addons/p5.sound.min.js"></script>
+<style>html,body{margin:0;height:100%;background:#000}</style></head><body><script>let wRect=[],bRect=[],osc;
+let whiteFreq=[261.63,293.66,329.63,349.23,392.0,440.0,493.88];
+let blackFreq=[277.18,311.13,349.23,392.00,440.00,493.88];
+function setup(){createCanvas(960,540);osc=new p5.Oscillator('sine');osc.start();osc.amp(0);for(x=0;x<7;x++)wRect[x]=0;for(y=0;y<6;y++)bRect[y]=0;}
+function draw(){background(220);let w=width/7,h=height;
+for(let x=0;x<7;x++){fill(wRect[x]?150:255);rect(x*w,0,w,h);}
+for(let y=0;y<6;y++){fill(bRect[y]?80:0);rect((y+1)*w-w/4,0,w/2,h*0.6);}}
+function mousePressed(){let w=width/7,h=height;
+for(let y=0;y<6;y++){if(mouseX>(y+1)*w-w/4&&mouseX<(y+1)*w-w/4+w/2&&mouseY<h*0.6){bRect[y]=1;play(blackFreq[y]);return;}}
+for(let x=0;x<7;x++){if(mouseX>x*w&&mouseX<(x+1)*w){wRect[x]=1;play(whiteFreq[x]);return;}}}
+function mouseReleased(){wRect.fill(0);bRect.fill(0);osc.amp(0,0.2);}
+function play(f){osc.freq(f);osc.amp(0.5,0.05);}</script></body></html>

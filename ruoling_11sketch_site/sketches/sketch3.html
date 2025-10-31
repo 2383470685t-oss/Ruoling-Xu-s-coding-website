@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sketch3</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/addons/p5.sound.min.js"></script>
+<style>html,body{margin:0;height:100%;background:#000}</style></head><body><script>let colms=30,rows=30;
+function setup(){createCanvas(960,540);}
+function draw(){background(220);let col1=color('#7371BC'),col2=color(255);
+for(let x=0;x<colms;x++){for(let y=0;y<rows;y++){let d=dist(mouseX,mouseY,x*width/colms,height*y/rows);
+let wave=sin(frameCount*0.01+d*0.5);let i=map(wave,-1,1,0,1);
+fill(lerpColor(col1,col2,i));rect(x*width/colms,height*y/rows,width/colms,height/rows);}}}</script></body></html>

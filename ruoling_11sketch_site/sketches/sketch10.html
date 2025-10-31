@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sketch10</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/addons/p5.sound.min.js"></script>
+<style>html,body{margin:0;height:100%;background:#000}</style></head><body><script>let lineObj,mic;
+function setup(){createCanvas(960,540);noFill();lineObj=new movingLine();mic=new p5.AudioIn();mic.start();}
+function draw(){background(0,20);let v=mic.getLevel();let vol=map(v,0,0.2,0,50);lineObj.move(vol);lineObj.display();}
+class movingLine{constructor(){this.num=random(8,15);this.x=[];this.y=[];for(let i=0;i<this.num;i++){this.x[i]=random(width);this.y[i]=random(height);}this.color=random(150,250);}
+move(vol){for(let i=0;i<this.num;i++){this.x[i]+=sin(frameCount*0.01+i)*vol*0.5;this.y[i]+=cos(frameCount*0.01+i)*vol*0.5;}}
+display(){stroke(this.color,200,255);strokeWeight(2);beginShape();for(let i=0;i<this.num;i++)vertex(this.x[i],this.y[i]);endShape();}}</script></body></html>

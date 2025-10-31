@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sketch2</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/addons/p5.sound.min.js"></script>
+<style>html,body{margin:0;height:100%;background:#000}</style></head><body><script>function setup(){createCanvas(960,540);frameRate(4);}
+function draw(){background(random(120,255));stroke(0);fill(0);
+let X=random(50,width-50),Y=random(100,height-100);
+let X1=random(-50,50),Y1=random(-40,40),X2=random(-50,50),Y2=random(-40,40),
+X3=random(-40,40),Y3=random(40,80),X4=random(-40,40),Y4=random(40,80);
+circle(X,Y-35,15);line(X,Y-30,X,Y+30);line(X,Y-20,X+X1,Y+Y1);line(X,Y-20,X+X2,Y+Y2);
+line(X,Y+30,X+X3,Y+Y3);line(X,Y+30,X+X4,Y+Y4);}</script></body></html>

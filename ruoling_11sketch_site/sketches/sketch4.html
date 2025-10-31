@@ -1,0 +1,6 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sketch4</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/addons/p5.sound.min.js"></script>
+<style>html,body{margin:0;height:100%;background:#000}</style></head><body><script>let num=20,y;function setup(){createCanvas(960,540);}function draw(){background(30,20);
+for(let i=0;i<num;i++){let t=frameCount*0.35-i*10;y=height/2+sin(t*0.1)*100;
+fill(255);noStroke();ellipse((i+1)*t,y,30);}}</script></body></html>
